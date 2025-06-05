@@ -6,10 +6,38 @@
 -->
 <html>
 	<head>
-		<title>Verti by HTML5 UP</title>
+		<title>여행사 사이트 8조 - Right Sidebar</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+        /* 사이드바 애니메이션 및 스타일 */
+        #sidebar {
+            background: #f8fafd;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(33,147,176,0.10);
+            padding: 32px 18px;
+            margin: 40px 0;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        #sidebar.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        #main-content {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(33,147,176,0.10);
+            padding: 32px 24px;
+            margin: 40px 0;
+        }
+        @media (max-width: 900px) {
+            .row { flex-direction: column !important; }
+            #sidebar, #main-content { margin: 20px 0; }
+        }
+    </style>
 	</head>
 	<body class="is-preload right-sidebar">
 		<div id="page-wrapper">
@@ -17,199 +45,44 @@
 			<!-- Header -->
 				<div id="header-wrapper">
 					<header id="header" class="container">
-
-						<!-- Logo -->
-							<div id="logo">
-								<h1><a href="index.html">Verti</a></h1>
-								<span>by HTML5 UP</span>
-							</div>
-
-						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-									<li><a href="index.html">Welcome</a></li>
-									<li>
-										<a href="#">Dropdown</a>
-										<ul>
-											<li><a href="#">Lorem ipsum dolor</a></li>
-											<li><a href="#">Magna phasellus</a></li>
-											<li>
-												<a href="#">Phasellus consequat</a>
-												<ul>
-													<li><a href="#">Lorem ipsum dolor</a></li>
-													<li><a href="#">Phasellus consequat</a></li>
-													<li><a href="#">Magna phasellus</a></li>
-													<li><a href="#">Etiam dolore nisl</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Veroeros feugiat</a></li>
-										</ul>
-									</li>
-									<li><a href="left-sidebar.html">Left Sidebar</a></li>
-									<li class="current"><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
-								</ul>
-							</nav>
-
 					</header>
 				</div>
 
 			<!-- Main -->
-				<div id="main-wrapper">
-					<div class="container">
-						<div class="row gtr-200">
-							<div class="col-8 col-12-medium">
-								<div id="content">
-
-									<!-- Content -->
-										<article>
-
-											<h2>오른쪽 사이드바</h2>
-
-											<p>겉모습이 다소 부족해 보여도 편안함과 아름다움이 함께 어우러져 있습니다.
-항상 올바른 방식으로 누군가에게 필요하며, 때로는 웃음이 앞서기도 합니다.
-어떤 일은 분명히 가능하며, 슬픔과 평화가 마음속에 공존합니다.
-때로는 어려움 속에서도 꾸준히 나아가며, 모든 경험이 우리를 성장하게 합니다.
-
-</p>
-
-											<h3>더 흥미로운 정보</h3>
-											<p>고통과 어려움 속에서도 우리는 늘 최선을 다해 성장합니다.
-때로는 웃음과 기쁨이 삶을 채우고, 때로는 고난이 우리를 더욱 단단하게 만듭니다.
-어떤 날은 부드러운 휴식이 필요하고, 어떤 날은 강한 의지가 필요하지요.
-성공과 실패를 반복하며 우리는 조금씩 더 나은 사람이 되어갑니다.
-삶의 여정에서 만나는 모든 경험들은 우리를 풍요롭게 하고,
-우리는 그 속에서 자신의 길을 찾아 나아갑니다.
-매 순간을 소중히 여기며, 변화와 도전을 두려워하지 않는다면
-분명 더 밝은 내일이 우리를 기다릴 것입니다..</p>
-
-											<p>작고 소중한 미소처럼, 삶은 깨끗한 힘으로 가득 차 있습니다.
-항상 준비된 자세로 노력하며, 지혜롭게 큰 흐름을 따라 살아갑니다.
-때로는 두려움을 내려놓고, 적절한 때를 기다리며 올바른 길을 걷습니다.
-고통 속에서도 균형과 존엄을 잃지 않고, 부드러움과 무게를 조화롭게 유지합니다.
-활동적이고 조화로운 삶 속에서 우리는 깨끗한 마음과 조화로운 움직임으로 나아갑니다.
-
-</p>
-
-										</article>
-
-								</div>
-							</div>
-							<div class="col-4 col-12-medium">
-								<div id="sidebar">
-
-									<!-- Sidebar -->
-										<section>
-											<h3>부제목</h3>
-											<p>겉모습은 다소 부족해 보여도, 편안함과 아름다움이 어우러져 있습니다.
-항상 올바른 방식으로 누군가에게 필요하며, 때로는 웃음이 앞서기도 합니다.
-어떤 일은 분명히 가능하며, 슬픔과 평화가 마음속에 공존합니다.
-때로는 어려움 속에서도 꾸준히 나아가며, 모든 경험이 우리를 성장하게 합니다.
-
-.</p>
-											<footer>
-												<a href="#" class="button icon solid fa-info-circle">Find out more</a>
-											</footer>
-										</section>
-
-										<section>
-											<h3>Subheading</h3>
-											<ul class="style2">
-												<li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-												<li><a href="#">Ornare in hendrerit in lectus</a></li>
-												<li><a href="#">Semper mod quis eget mi dolore</a></li>
-												<li><a href="#">Quam turpis feugiat sit dolor</a></li>
-												<li><a href="#">Amet ornare in hendrerit in lectus</a></li>
-												<li><a href="#">Semper mod quisturpis nisi</a></li>
-											</ul>
-										</section>
-
-								</div>
-							</div>
+				<div class="container">
+					<div class="row" style="display:flex;">
+						<div class="col-8 col-12-medium" id="main-content">
+							<h1>Right Sidebar 예시</h1>
+							<p>
+								이 페이지는 오른쪽에 사이드바가 있는 구조입니다.<br>
+								본문 영역에는 팀 소개, 여행 후기, 사진 등 원하는 내용을 자유롭게 넣을 수 있습니다.<br>
+								사이드바에는 여행 팁, 추천 여행지 등 다양한 정보를 확인할 수 있습니다.
+							</p>
+							<h2>본문 예시</h2>
+							<p>
+								모든 것은 쉽게 시작될 수 있으며, 자연스럽게 흐르는 리듬 안에서 움직일 수 있습니다.<br>
+								긴장과 구조는 조화롭게 결합되어야 하며, 그 흐름은 편안함과 안정감으로 이어집니다.<br>
+								때로는 특별하지 않아 보여도, 그 자체로 충분히 의미 있는 결과를 만들어냅니다.
+							</p>
+						</div>
+						<div class="col-4 col-12-medium" id="sidebar">
+							<h2>여행 팁</h2>
+							<ul>
+								<li>여권/비자 준비</li>
+								<li>여행 보험 가입</li>
+								<li>환전 및 현지 통신</li>
+								<li>짐 싸기 체크리스트</li>
+							</ul>
+							<h2>추천 여행지</h2>
+							<ul>
+								<li>파리</li>
+								<li>도쿄</li>
+								<li>뉴욕</li>
+								<li>시드니</li>
+							</ul>
 						</div>
 					</div>
 				</div>
-
-			<!-- Footer -->
-				<div id="footer-wrapper">
-					<footer id="footer" class="container">
-						<div class="row">
-							<div class="col-3 col-6-medium col-12-small">
-
-								<!-- Links -->
-									<section class="widget links">
-										<h3>Random Stuff</h3>
-										<ul class="style2">
-											<li><a href="#">Etiam feugiat condimentum</a></li>
-											<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-											<li><a href="#">Sed porttitor cras in erat nec</a></li>
-											<li><a href="#">Felis varius pellentesque potenti</a></li>
-											<li><a href="#">Nullam scelerisque blandit leo</a></li>
-										</ul>
-									</section>
-
-							</div>
-							<div class="col-3 col-6-medium col-12-small">
-
-								<!-- Links -->
-									<section class="widget links">
-										<h3>Random Stuff</h3>
-										<ul class="style2">
-											<li><a href="#">Etiam feugiat condimentum</a></li>
-											<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-											<li><a href="#">Sed porttitor cras in erat nec</a></li>
-											<li><a href="#">Felis varius pellentesque potenti</a></li>
-											<li><a href="#">Nullam scelerisque blandit leo</a></li>
-										</ul>
-									</section>
-
-							</div>
-							<div class="col-3 col-6-medium col-12-small">
-
-								<!-- Links -->
-									<section class="widget links">
-										<h3>Random Stuff</h3>
-										<ul class="style2">
-											<li><a href="#">Etiam feugiat condimentum</a></li>
-											<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-											<li><a href="#">Sed porttitor cras in erat nec</a></li>
-											<li><a href="#">Felis varius pellentesque potenti</a></li>
-											<li><a href="#">Nullam scelerisque blandit leo</a></li>
-										</ul>
-									</section>
-
-							</div>
-							<div class="col-3 col-6-medium col-12-small">
-
-								<!-- Contact -->
-									<section class="widget contact">
-										<h3>Contact Us</h3>
-										<ul>
-											<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-											<li><a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
-										</ul>
-										<p>1234 Fictional Road<br />
-										Nashville, TN 00000<br />
-										(800) 555-0000</p>
-									</section>
-
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12">
-								<div id="copyright">
-									<ul class="menu">
-										<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</footer>
-				</div>
-
 			</div>
 
 		<!-- Scripts -->
@@ -220,6 +93,12 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+        // 페이지 로드 후 사이드바가 오른쪽에서 나타나도록
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('sidebar').classList.add('visible');
+        });
+    </script>
 
 	</body>
 </html>

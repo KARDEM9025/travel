@@ -10,6 +10,96 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+        /* 배너, Features, Sidebar, Footer 등 추가 스타일 */
+        #banner {
+            /* 원래 Verti 템플릿의 배경색으로 복원 */
+            background: #2e3842;
+            color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(33,147,176,0.2);
+        }
+        #banner h2, #banner p { color: #fff; }
+        #banner .button { margin-top: 10px; }
+
+        /* Features 개선 */
+        .box.feature {
+            transition: box-shadow 0.2s, transform 0.2s;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .box.feature:hover {
+            box-shadow: 0 4px 24px rgba(33,147,176,0.15);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .box.feature .image img {
+            transition: transform 0.3s;
+        }
+        .box.feature:hover .image img {
+            transform: scale(1.08);
+        }
+
+        /* Sidebar 썸네일 효과 */
+        .widget.thumbnails .image.fit img {
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .widget.thumbnails .image.fit:hover img {
+            transform: scale(1.07);
+        }
+
+        /* 팝업 모달 개선 */
+        #custom-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.5);
+            align-items: center; justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        #custom-modal[style*="display: flex"] {
+            display: flex !important;
+        }
+        #custom-modal > div {
+            background: #fff;
+            max-width: 90vw; max-height: 80vh;
+            overflow: auto;
+            border-radius: 16px;
+            padding: 32px 24px 24px 24px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(33,147,176,0.18);
+            animation: popIn 0.3s;
+        }
+        #modal-close {
+            position: absolute; top: 10px; right: 18px;
+            background: none; border: none;
+            font-size: 2em; color: #2193b0;
+            cursor: pointer; transition: color 0.2s;
+        }
+        #modal-close:hover { color: #e74c3c; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* Footer 개선 */
+        #footer-wrapper {
+            background: #2193b0;
+            color: #fff;
+            border-radius: 16px 16px 0 0;
+            margin-top: 40px;
+        }
+        #footer .widget.links h3, #footer .widget.contact h3 { color: #fff; }
+        #footer .icon { color: #fff; transition: color 0.2s; }
+        #footer .icon:hover { color: #6dd5ed; }
+        #copyright .menu { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        #copyright .menu li { color: #fff; }
+
+        /* 반응형 개선 */
+        @media (max-width: 800px) {
+            #banner { border-radius: 0; }
+            #footer-wrapper { border-radius: 0; }
+        }
+    </style>
 	</head>
 	<body class="is-preload homepage">
 		<div id="page-wrapper">
@@ -25,31 +115,35 @@
 							</div>
 
 						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-									<li class="current"><a href="index.html">Welcome</a></li>
-									<li>
-										<a href="#">Dropdown</a>
-										<ul>
-											<li><a href="#">Lorem ipsum dolor</a></li>
-											<li><a href="#">Magna phasellus</a></li>
-											<li>
-												<a href="#">Phasellus consequat</a>
-												<ul>
-													<li><a href="#">Lorem ipsum dolor</a></li>
-													<li><a href="#">Phasellus consequat</a></li>
-													<li><a href="#">Magna phasellus</a></li>
-													<li><a href="#">Etiam dolore nisl</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Veroeros feugiat</a></li>
-										</ul>
-									</li>
-									<li><a href="left-sidebar.html">Left Sidebar</a></li>
-									<li><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
-								</ul>
-							</nav>
+							<nav id="nav" style="position:relative; margin-bottom: 40px;">
+    <ul>
+        <li class="current"><a href="index.html">Welcome</a></li>
+        <li>
+            <a href="dropdown.html">Dropdown</a>
+            <ul>
+                <li><a href="dropdown.html">Lorem ipsum dolor</a></li>
+                <li><a href="dropdown.html">Magna phasellus</a></li>
+                <li><a href="dropdown.html">Phasellus consequat</a></li>
+                <li><a href="dropdown.html">Veroeros feugiat</a></li>
+            </ul>
+        </li>
+    </ul>
+    <!-- 햄버거 버튼은 그대로 -->
+    <button id="left-sidebar-toggle"
+        aria-label="왼쪽 사이드바 열기"
+        style="background:none;border:none;cursor:pointer;position:fixed;top:18px;left:24px;z-index:2001;transition:top 0.3s;">
+        <span style="display:block;width:28px;height:4px;background:#fff;margin:5px 0;border-radius:2px;"></span>
+        <span style="display:block;width:28px;height:4px;background:#fff;margin:5px 0;border-radius:2px;"></span>
+        <span style="display:block;width:28px;height:4px;background:#fff;margin:5px 0;border-radius:2px;"></span>
+    </button>
+    <button id="right-sidebar-toggle"
+        aria-label="오른쪽 사이드바 열기"
+        style="background:none;border:none;cursor:pointer;position:fixed;top:18px;right:24px;z-index:2001;transition:top 0.3s;">
+        <span style="display:block;width:28px;height:4px;background:#fff;margin:5px 0;border-radius:2px;"></span>
+        <span style="display:block;width:28px;height:4px;background:#fff;margin:5px 0;border-radius:2px;"></span>
+        <span style="display:block;width:28px;height:4px;background:#fff;margin:5px 0;border-radius:2px;"></span>
+    </button>
+</nav>
 
 					</header>
 				</div>
@@ -59,13 +153,21 @@
 					<div id="banner" class="box container">
 						<div class="row">
 							<div class="col-7 col-12-medium">
-								<h2>Hi. This is 8team project.</h2>
-								<p>원광대 컴개론 8조 과제</p>
+								<h2>여행사 사이트 8조</h2>
+								<p>원광대학교 컴퓨터개론 8조 과제<br>팀원: 이연우, 유준상, 장재연, 이재현</p>
 							</div>
 							<div class="col-5 col-12-medium">
 								<ul>
-									<li><a href="#" class="button large icon solid fa-arrow-circle-right">Ok let's go</a></li>
-									<li><a href="#" class="button alt large icon solid fa-question-circle">More info</a></li>
+									<li>
+										<a href="letsgo.html" class="button large icon solid fa-arrow-circle-right">
+											Ok let's go
+										</a>
+									</li>
+									<li>
+										<a href="info.html" class="button alt large icon solid fa-question-circle">
+											More info
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -83,11 +185,10 @@
 										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 										<div class="inner">
 											<header>
-												<h2>Put something here</h2>
-												<p>Maybe here as well I think</p>
+												<h2>여행의 시작</h2>
+												<p>설렘과 기대</p>
 											</header>
-											<p>겉모습은 다소 부족할지라도, 편안함과 힘이 함께 어우러져 있습니다.
-언제나 꾸준히 존재하며, 규칙적인 리듬과 부드러운 움직임을 유지합니다..</p>
+											<p>여행의 시작은 언제나 설렘과 기대가 가득합니다.<br>새로운 경험과 만남이 기다리고 있습니다.</p>
 										</div>
 									</section>
 
@@ -96,20 +197,13 @@
 
 								<!-- Box -->
 									<section class="box feature">
-    <a href="#" class="image featured"><img src="images/pic01.jpg" alt="여행 사진" /></a>
-    <div class="inner">
-      <header>
-        <h2>여행지 소개</h2>
-        <p>이곳은 멋진 여행지예요!</p>
-      </header>
-    </div>
-  </section>
-</div>
+										<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+										<div class="inner">
+											<header>
+												<h2>함께하는 순간</h2>
+												<p>추억 만들기</p>
 											</header>
-											<p>겉모습은 다소 부족할 수 있지만,
-편안함과 힘이 조화롭게 어우러져 있습니다.
-언제나 꾸준히 자신의 자리를 지키며,
-규칙적인 생활과 부드러운 흐름을 유지합니다.</p>
+											<p>여행은 혼자가 아닌 함께할 때 더 큰 추억이 됩니다.<br>소중한 사람들과의 순간을 기록하세요.</p>
 										</div>
 									</section>
 
@@ -121,13 +215,10 @@
 										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
 										<div class="inner">
 											<header>
-												<h2>Oh, and finally ...</h2>
-												<p>Here's another intriguing subtitle</p>
+												<h2>여행의 마무리</h2>
+												<p>성장과 회상</p>
 											</header>
-											<p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-										</div>
-									</section>
-
+											<p>여행을 마치고 돌아오면 한층 성장한 자신을 발견할 수 있습니다.<br>추억을 되새기며 다음 여행을 준비하세요.</p>
 										</div>
 									</section>
 
@@ -135,6 +226,38 @@
 						</div>
 					</div>
 				</div>
+
+				<!-- Dropdown Sections (팝업용) -->
+        <div id="dropdown-sections" style="margin: 30px 0;">
+            <div id="section1" class="dropdown-content" style="display:none;">
+                <h3>Lorem ipsum dolor</h3>
+                <p>Lorem ipsum dolor 내용입니다.</p>
+            </div>
+            <div id="section2" class="dropdown-content" style="display:none;">
+                <h3>Magna phasellus</h3>
+                <p>Magna phasellus 내용입니다.</p>
+            </div>
+            <div id="section3" class="dropdown-content" style="display:none;">
+                <h3>Lorem ipsum dolor (Sub)</h3>
+                <p>Sub 메뉴의 Lorem ipsum dolor 내용입니다.</p>
+            </div>
+            <div id="section4" class="dropdown-content" style="display:none;">
+                <h3>Phasellus consequat</h3>
+                <p>Phasellus consequat 내용입니다.</p>
+            </div>
+            <div id="section5" class="dropdown-content" style="display:none;">
+                <h3>Magna phasellus (Sub)</h3>
+                <p>Sub 메뉴의 Magna phasellus 내용입니다.</p>
+            </div>
+            <div id="section6" class="dropdown-content" style="display:none;">
+                <h3>Etiam dolore nisl</h3>
+                <p>Etiam dolore nisl 내용입니다.</p>
+            </div>
+            <div id="section7" class="dropdown-content" style="display:none;">
+                <h3>Veroeros feugiat</h3>
+                <p>Veroeros feugiat 내용입니다.</p>
+            </div>
+        </div>
 
 			<!-- Main -->
 				<div id="main-wrapper">
@@ -145,16 +268,28 @@
 								<!-- Sidebar -->
 									<div id="sidebar">
 										<section class="widget thumbnails">
-											<h3>Interesting stuff</h3>
+											<h3>여행지 미리보기</h3>
 											<div class="grid">
 												<div class="row gtr-50">
-													<div class="col-6"><a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a></div>
-													<div class="col-6"><a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a></div>
-													<div class="col-6"><a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a></div>
-													<div class="col-6"><a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a></div>
+													<div class="col-6">
+														<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+														<p style="font-size:0.9em; text-align:center;">유럽의 아름다운 거리</p>
+													</div>
+													<div class="col-6">
+														<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+														<p style="font-size:0.9em; text-align:center;">아시아의 활기찬 시장</p>
+													</div>
+													<div class="col-6">
+														<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+														<p style="font-size:0.9em; text-align:center;">남미의 이국적인 풍경</p>
+													</div>
+													<div class="col-6">
+														<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+														<p style="font-size:0.9em; text-align:center;">북미의 대자연</p>
+													</div>
 												</div>
 											</div>
-											<a href="#" class="button icon fa-file-alt">More</a>
+											<a href="no-sidebar.html" class="button icon fa-file-alt">More</a>
 										</section>
 									</div>
 
@@ -164,11 +299,17 @@
 								<!-- Content -->
 									<div id="content">
 										<section class="last">
-											<h2>So what's this all about?</h2>
-											<p>This is <strong>Verti</strong>, a free and fully responsive HTML5 site template by <a href="http://html5up.net">HTML5 UP</a>.
-											Verti is released under the <a href="http://html5up.net/license">Creative Commons Attribution license</a>, so feel free to use it for any personal or commercial project you might have going on (just don't forget to credit us for the design!)</p>
-											<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus. Praesent semper bibendum ipsum, et tristique augue fringilla eu. Vivamus id risus vel dolor auctor euismod quis eget mi. Etiam eu ante risus. Aliquam erat volutpat. Aliquam luctus mattis lectus sit amet phasellus quam turpis.</p>
-											<a href="#" class="button icon solid fa-arrow-circle-right">Continue Reading</a>
+											<h2>이 사이트는?</h2>
+											<p>
+												<strong>Verti</strong> 템플릿을 기반으로 제작된 여행사 컨셉의 팀 프로젝트 사이트입니다.<br>
+												다양한 여행지 정보와 팀원들의 협업 결과물을 한눈에 볼 수 있습니다.<br>
+												메뉴의 Dropdown을 눌러 각종 여행 정보와 팁을 팝업으로 확인해보세요!
+											</p>
+											<p>
+												<strong>팀원:</strong> 이연우, 유준상, 장재연, 이재현<br>
+												<strong>과목:</strong> 컴퓨터개론<br>
+												<strong>지도교수:</strong> (교수명 입력)
+											</p>
 										</section>
 									</div>
 
@@ -185,13 +326,12 @@
 
 								<!-- Links -->
 									<section class="widget links">
-										<h3>Random Stuff</h3>
+										<h3>여행 팁</h3>
 										<ul class="style2">
-											<li><a href="#">Etiam feugiat condimentum</a></li>
-											<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-											<li><a href="#">Sed porttitor cras in erat nec</a></li>
-											<li><a href="#">Felis varius pellentesque potenti</a></li>
-											<li><a href="#">Nullam scelerisque blandit leo</a></li>
+											<li><a href="#">여권/비자 준비</a></li>
+											<li><a href="#">여행 보험 가입</a></li>
+											<li><a href="#">환전 및 현지 통신</a></li>
+											<li><a href="#">짐 싸기 체크리스트</a></li>
 										</ul>
 									</section>
 
@@ -200,13 +340,12 @@
 
 								<!-- Links -->
 									<section class="widget links">
-										<h3>Random Stuff</h3>
+										<h3>추천 여행지</h3>
 										<ul class="style2">
-											<li><a href="#">Etiam feugiat condimentum</a></li>
-											<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-											<li><a href="#">Sed porttitor cras in erat nec</a></li>
-											<li><a href="#">Felis varius pellentesque potenti</a></li>
-											<li><a href="#">Nullam scelerisque blandit leo</a></li>
+											<li><a href="#">파리</a></li>
+											<li><a href="#">도쿄</a></li>
+											<li><a href="#">뉴욕</a></li>
+											<li><a href="#">시드니</a></li>
 										</ul>
 									</section>
 
@@ -249,7 +388,10 @@
 							<div class="col-12">
 								<div id="copyright">
 									<ul class="menu">
-										<li> 기획 이연우 </li><li> 유준상 <li> 장재연 </li><li> 이재현 </li>
+										<li>기획 이연우</li>
+										<li>유준상</li>
+										<li>장재연</li>
+										<li>이재현</li>
 									</ul>
 								</div>
 							</div>
@@ -267,6 +409,163 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<!-- 팝업 모달(창) HTML 추가: body 맨 아래에 위치 -->
+    <div id="custom-modal">
+        <div>
+            <button id="modal-close">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Dropdown 메뉴 클릭 시 팝업 동작 스크립트 -->
+    <script>
+    document.querySelectorAll('#nav [data-section]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var sectionId = this.getAttribute('data-section');
+            var sectionDiv = document.getElementById(sectionId);
+            if(sectionDiv) {
+                document.getElementById('modal-content').innerHTML = sectionDiv.innerHTML;
+                document.getElementById('custom-modal').style.display = 'flex';
+            }
+        });
+    });
+    document.getElementById('modal-close').onclick = function() {
+        document.getElementById('custom-modal').style.display = 'none';
+    };
+    document.getElementById('custom-modal').onclick = function(e) {
+        if(e.target === this) this.style.display = 'none';
+    };
+    </script>
+
+    <script>
+    // 햄버거 버튼 클릭 시 사이드바 열기
+    document.getElementById('sidebar-toggle').onclick = function() {
+        document.getElementById('main-sidebar').style.right = '0';
+    };
+    // 닫기 버튼 클릭 시 사이드바 닫기
+    document.getElementById('sidebar-close').onclick = function() {
+        document.getElementById('main-sidebar').style.right = '-320px';
+    };
+    // 바깥 클릭 시 닫기 (선택)
+    document.addEventListener('click', function(e) {
+        const sidebar = document.getElementById('main-sidebar');
+        const toggle = document.getElementById('sidebar-toggle');
+        if (
+            sidebar.style.right === '0px' &&
+            !sidebar.contains(e.target) &&
+            e.target !== toggle && !toggle.contains(e.target)
+        ) {
+            sidebar.style.right = '-320px';
+        }
+    });
+    </script>
+
+    <!-- 왼쪽 사이드바 -->
+<div id="left-sidebar"
+    style="position:fixed;top:0;left:-320px;width:300px;height:100vh;background:#fff;box-shadow:2px 0 16px rgba(33,147,176,0.10);z-index:2000;transition:left 0.4s;display:flex;flex-direction:column;padding:32px 18px;">
+    <button id="left-sidebar-close"
+        aria-label="왼쪽 사이드바 닫기"
+        style="background:none;border:none;font-size:2em;align-self:flex-end;color:#222;cursor:pointer;">
+        &times;
+    </button>
+    <h2 style="color:#222;">여행 팁</h2>
+    <ul style="color:#222;">
+        <li>여권/비자 준비</li>
+        <li>여행 보험 가입</li>
+        <li>환전 및 현지 통신</li>
+        <li>짐 싸기 체크리스트</li>
+    </ul>
+    <h2 style="color:#222;">추천 여행지</h2>
+    <ul style="color:#222;">
+        <li>파리</li>
+        <li>도쿄</li>
+        <li>뉴욕</li>
+        <li>시드니</li>
+    </ul>
+</div>
+
+<!-- 오른쪽 사이드바 -->
+<div id="right-sidebar"
+    style="position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#fff;box-shadow:-2px 0 16px rgba(33,147,176,0.10);z-index:2000;transition:right 0.4s;display:flex;flex-direction:column;padding:32px 18px;">
+    <button id="right-sidebar-close"
+        aria-label="오른쪽 사이드바 닫기"
+        style="background:none;border:none;font-size:2em;align-self:flex-end;color:#222;cursor:pointer;">
+        &times;
+    </button>
+    <h2 style="color:#222;">여행 팁</h2>
+    <ul style="color:#222;">
+        <li>여권/비자 준비</li>
+        <li>여행 보험 가입</li>
+        <li>환전 및 현지 통신</li>
+        <li>짐 싸기 체크리스트</li>
+    </ul>
+    <h2 style="color:#222;">추천 여행지</h2>
+    <ul style="color:#222;">
+        <li>파리</li>
+        <li>도쿄</li>
+        <li>뉴욕</li>
+        <li>시드니</li>
+    </ul>
+</div>
+
+<script>
+    // 햄버거 버튼/사이드바 열기/닫기
+    const leftSidebarToggle = document.getElementById('left-sidebar-toggle');
+    const leftSidebar = document.getElementById('left-sidebar');
+    const leftSidebarClose = document.getElementById('left-sidebar-close');
+    const rightSidebarToggle = document.getElementById('right-sidebar-toggle');
+    const rightSidebar = document.getElementById('right-sidebar');
+    const rightSidebarClose = document.getElementById('right-sidebar-close');
+
+    leftSidebarToggle.onclick = function(e) {
+        e.stopPropagation();
+        leftSidebar.style.left = '0';
+        leftSidebarToggle.style.display = 'none';
+    };
+    leftSidebarClose.onclick = function() {
+        leftSidebar.style.left = '-320px';
+        leftSidebarToggle.style.display = 'block';
+    };
+    rightSidebarToggle.onclick = function(e) {
+        e.stopPropagation();
+        rightSidebar.style.right = '0';
+        rightSidebarToggle.style.display = 'none';
+    };
+    rightSidebarClose.onclick = function() {
+        rightSidebar.style.right = '-320px';
+        rightSidebarToggle.style.display = 'block';
+    };
+    // 바깥 클릭 시 닫기
+    document.addEventListener('click', function(e) {
+        if (leftSidebar.style.left === '0px' && !leftSidebar.contains(e.target) && e.target.id !== 'left-sidebar-toggle') {
+            leftSidebar.style.left = '-320px';
+            leftSidebarToggle.style.display = 'block';
+        }
+        if (rightSidebar.style.right === '0px' && !rightSidebar.contains(e.target) && e.target.id !== 'right-sidebar-toggle') {
+            rightSidebar.style.right = '-320px';
+            rightSidebarToggle.style.display = 'block';
+        }
+    });
+
+    // 스크롤 시 햄버거 버튼 위로 이동(숨김 효과)
+    let lastScrollY = window.scrollY;
+    function toggleHamburgerOnScroll() {
+        const show = window.scrollY < 10;
+        const hideTop = '-60px';
+        const showTop = '18px';
+        if (leftSidebar.style.left !== '0px') {
+            leftSidebarToggle.style.top = show ? showTop : hideTop;
+        }
+        if (rightSidebar.style.right !== '0px') {
+            rightSidebarToggle.style.top = show ? showTop : hideTop;
+        }
+    }
+    window.addEventListener('scroll', toggleHamburgerOnScroll);
+    // 초기 위치 보정
+    toggleHamburgerOnScroll();
+</script>
 
 	</body>
 </html>
